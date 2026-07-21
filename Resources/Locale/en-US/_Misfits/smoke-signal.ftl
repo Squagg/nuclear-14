@@ -18,3 +18,8 @@ smoke-signal-broadcast = Smoke signals rise from the village: {$message}
 
 ## Atmospheric notice for nearby non-tribe bystanders
 smoke-signal-nearby = Thick smoke rises nearby, carrying the smell of damp leaves and green wood.
+
+# #Misfits Add - Tree of Life faction announcement wording.
+willower-tree-announce-verb = Announce to the Willowers
+willower-tree-announcement = The Tree of Life whispers: {$message}
+willower-tree-announcement-cooldown = The Tree of Life is still gathering its voice... ({$seconds}s remaining)

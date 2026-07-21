@@ -15,10 +15,12 @@ using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Roles; // #Misfits Add - resolve dual-department Willower jobs.
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player; // #Misfits Fix - ActorComponent lives in Robust.Shared.Player
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._Misfits.SmokeSignal;
@@ -35,6 +37,7 @@ public sealed class SmokeSignalSystem : EntitySystem
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!; // #Misfits Add - resolve dual-department Willower jobs
 
     private readonly HashSet<EntityUid> _nearbyBuffer = new();
 
@@ -61,13 +64,13 @@ public sealed class SmokeSignalSystem : EntitySystem
         if (!args.CanInteract || !args.CanAccess)
             return;
 
-        // Only Tribe-department players see this verb
-        if (!IsInDepartment(args.User, component.TargetDepartment))
+        // #Misfits Change - respect optional activator role allowlist.
+        if (!CanUse(args.User, component))
             return;
 
         args.Verbs.Add(new ActivationVerb
         {
-            Text = Loc.GetString("smoke-signal-verb"),
+            Text = Loc.GetString(component.Verb), // #Misfits Change - allow Tree-specific wording
             Act = () =>
             {
                 TryOpenSignalUi(uid, component, args.User);
@@ -81,7 +84,7 @@ public sealed class SmokeSignalSystem : EntitySystem
         if (args.Handled || !args.Complex)
             return;
 
-        if (!IsInDepartment(args.User, component.TargetDepartment))
+        if (!component.OpenOnActivate || !CanUse(args.User, component)) // #Misfits Change - Tree activation stays verb-only.
             return;
 
         if (!TryOpenSignalUi(uid, component, args.User))
@@ -99,7 +102,7 @@ public sealed class SmokeSignalSystem : EntitySystem
         if (args.Actor is not { Valid: true } sender) // #Misfits Fix - .Session removed from BUI messages; use args.Actor
             return;
 
-        if (!IsInDepartment(sender, component.TargetDepartment))
+        if (!CanUse(sender, component)) // #Misfits Change - enforce optional sender role allowlist.
             return;
 
         // Re-validate cooldown (race guard)
@@ -118,20 +121,11 @@ public sealed class SmokeSignalSystem : EntitySystem
         component.CooldownEnd = _timing.CurTime + component.Cooldown;
 
         // Build the broadcast text
-        var broadcastText = Loc.GetString("smoke-signal-broadcast", ("message", message));
+        var broadcastText = Loc.GetString(component.BroadcastMessage, ("message", message)); // #Misfits Change - allow Tree-specific wording
 
-        // Send a large popup to every living Tribe-department player (server-wide)
-        var query = EntityQueryEnumerator<ActorComponent>();
-        while (query.MoveNext(out var playerUid, out _))
-        {
-            if (_mobState.IsDead(playerUid))
-                continue;
-
-            if (!IsInDepartment(playerUid, component.TargetDepartment))
-                continue;
-
+        // #Misfits Change - use the tested living department recipient selection.
+        foreach (var playerUid in GetRecipients(component.TargetDepartment))
             _popup.PopupEntity(broadcastText, playerUid, playerUid, PopupType.Large);
-        }
 
         // Also send an atmospheric notice to nearby non-tribe bystanders
         // so the signal is observable in-world (and testable without a tribe job)
@@ -172,7 +166,7 @@ public sealed class SmokeSignalSystem : EntitySystem
         {
             var remaining = (int) Math.Ceiling((component.CooldownEnd.Value - _timing.CurTime).TotalSeconds);
             _popup.PopupEntity(
-                Loc.GetString("smoke-signal-cooldown", ("seconds", remaining)),
+                Loc.GetString(component.CooldownMessage, ("seconds", remaining)), // #Misfits Change - allow Tree-specific wording
                 uid, user, PopupType.SmallCaution);
             return false;
         }
@@ -182,18 +176,41 @@ public sealed class SmokeSignalSystem : EntitySystem
         return true;
     }
 
-    /// <summary>
-    /// Returns true if the entity's job belongs to the given department.
-    /// Mirrors the TribalHuntSystem.IsInDepartment pattern exactly.
-    /// </summary>
-    private bool IsInDepartment(EntityUid uid, string departmentId)
+    // #Misfits Change - exact department membership supports dual-department Willower roles.
+    internal bool CanUse(EntityUid uid, SmokeSignalComponent component)
     {
-        if (!_mind.TryGetMind(uid, out var mindId, out _))
+        if (!_mind.TryGetMind(uid, out var mindId, out _)
+            || !_jobs.MindTryGetJob(mindId, out _, out var job))
             return false;
 
-        if (!_jobs.MindTryGetJob(mindId, out _, out var jobPrototype))
+        if (!_prototypes.TryIndex<DepartmentPrototype>(component.TargetDepartment, out var department)
+            || !department.Roles.Contains(job.ID))
             return false;
 
-        return _jobs.TryGetDepartment(jobPrototype.ID, out var department) && department.ID == departmentId;
+        return component.ActivatorJobs is not { Count: > 0 }
+            || component.ActivatorJobs.Contains(job.ID);
+    }
+
+    internal bool IsInDepartment(EntityUid uid, string departmentId)
+    {
+        if (!_mind.TryGetMind(uid, out var mindId, out _)
+            || !_jobs.MindTryGetJob(mindId, out _, out var job)
+            || !_prototypes.TryIndex<DepartmentPrototype>(departmentId, out var department))
+            return false;
+
+        return department.Roles.Contains(job.ID);
+    }
+
+    // #Misfits Add - share exact living Actor selection between delivery and regression coverage.
+    internal IEnumerable<EntityUid> GetRecipients(string departmentId)
+    {
+        var query = EntityQueryEnumerator<ActorComponent>();
+        while (query.MoveNext(out var playerUid, out _))
+        {
+            if (_mobState.IsDead(playerUid) || !IsInDepartment(playerUid, departmentId))
+                continue;
+
+            yield return playerUid;
+        }
     }
 }

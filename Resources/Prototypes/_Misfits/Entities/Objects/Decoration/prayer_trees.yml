@@ -76,3 +76,18 @@
       color: "#c0faef"
       radius: 5
       power: 4
+    # #Misfits Add - Willower leadership-only Tree announcement.
+    - type: SmokeSignal
+      cooldown: 300
+      maxMessageLength: 128
+      targetDepartment: Tribe
+      nearbyRange: 0
+      openOnActivate: false
+      activatorJobs: [ TribalShaman, TribalElder ]
+      verb: willower-tree-announce-verb
+      broadcastMessage: willower-tree-announcement
+      cooldownMessage: willower-tree-announcement-cooldown
+    - type: UserInterface
+      interfaces:
+        enum.SmokeSignalUiKey.Key:
+          type: SmokeSignalBoundUserInterface
