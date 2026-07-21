@@ -602,7 +602,7 @@
       - MisfitsBorgModuleTribalHarvest # Harvest module
       - MisfitsBorgModuleTribalConstruction # Tribal settlement construction module
       id: # pre-load the nav module into the id inventory slot
-      - MisfitsRobotNavCardRobCo # RobCo Industries Navigation? TODO maybe an alternative
+      - MisfitsRobotNavCardTribal # #Misfits Add - Tree TacMap tracks the tribal Protectron card only
       key_slots:
       - EncryptionKeyWastelandGlobal
   - type: BorgHands # this one only gets one functioning hand, it is decrepit

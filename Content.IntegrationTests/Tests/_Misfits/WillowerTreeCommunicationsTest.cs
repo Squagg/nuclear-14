@@ -1,24 +1,116 @@
 // #Misfits Change - Willower Tree delivery, cooldown, and default regression coverage.
 using System.Linq;
 using Content.Server._Misfits.SmokeSignal;
+using Content.Server._Misfits.WastelandMap;
+using Content.Shared.Access.Components;
 using Content.Shared._Misfits.SmokeSignal;
+using Content.Shared._Misfits.WastelandMap;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Tag;
 using Robust.Server.Player;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
+using Robust.Shared.Map;
+using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.IntegrationTests.Tests._Misfits;
 
 [TestFixture]
 public sealed class WillowerTreeCommunicationsTest
 {
+    // #Misfits Add - Tree tactical feed only follows tagged Willower identification items.
+    [Test]
+    public async Task TribeFeedTracksOnlyWillowerIdentificationItems()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Dirty = true });
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+        var entities = server.ResolveDependency<IEntityManager>();
+        var tags = entities.System<TagSystem>();
+        var maps = entities.System<WastelandMapSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            var pendant = entities.SpawnEntity("N14IDTribeBossPendant", new EntityCoordinates(map.Grid, 1f, 1f));
+            var tribalCard = entities.SpawnEntity("MisfitsRobotNavCardTribal", new EntityCoordinates(map.Grid, 2f, 2f));
+            var ordinaryCard = entities.SpawnEntity("MisfitsRobotNavCardRobCo", new EntityCoordinates(map.Grid, 3f, 3f));
+            entities.GetComponent<IdCardComponent>(pendant).FullName = "Willow Chieftan";
+            entities.GetComponent<IdCardComponent>(tribalCard).FullName = "Spirit-Tender";
+
+            var component = new WastelandMapComponent
+            {
+                TacticalFeed = WastelandMapTacticalFeedKind.Tribe,
+                MapTexturePath = new ResPath("_Misfits/Maps/wendover_map.png"),
+                WorldBounds = new Box2(-10f, -10f, 10f, 10f),
+                ActivatorJobs = ["TribalShaman", "TribalElder"],
+            };
+            var state = maps.BuildState(component, map.MapId);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(tags.HasTag(pendant, "IdCardTribe"), Is.True);
+                Assert.That(tags.HasTag(tribalCard, "IdCardTribe"), Is.True);
+                Assert.That(tags.HasTag(ordinaryCard, "IdCardTribe"), Is.False);
+                Assert.That(state.TrackedBlips.Select(x => x.Label), Is.EquivalentTo(new[] { "Willow Chieftan (Willowers Chieftan)", "Spirit-Tender (Protectron Spirit-Tender)" }));
+                Assert.That(state.TrackedBlips.All(x => x.Kind == WastelandMapTrackedBlipKind.Willower), Is.True);
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    // #Misfits Add - Tree TacMap authorizes leaders while leaving maps without allowlists unrestricted.
+    [Test]
+    public async Task TreeTacMapAllowsOnlyWillowerLeaders()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Dirty = true });
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+        var entities = server.ResolveDependency<IEntityManager>();
+        var minds = entities.System<SharedMindSystem>();
+        var roles = entities.System<SharedRoleSystem>();
+        var maps = entities.System<WastelandMapSystem>();
+
+        await server.WaitAssertion(() =>
+        {
+            EntityUid SpawnWithJob(string job)
+            {
+                var body = entities.SpawnEntity(null, map.GridCoords);
+                entities.EnsureComponent<MindContainerComponent>(body);
+                var mind = minds.CreateMind(null).Owner;
+                minds.TransferTo(mind, body);
+                roles.MindAddRole(mind, new JobComponent { Prototype = job });
+                return body;
+            }
+
+            var shaman = SpawnWithJob("TribalShaman");
+            var elder = SpawnWithJob("TribalElder");
+            var tribal = SpawnWithJob("Tribal");
+            var tree = entities.SpawnEntity("TribalTree", map.GridCoords);
+            var treeMap = entities.GetComponent<WastelandMapComponent>(tree);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(treeMap.ActivatorJobs, Is.EquivalentTo(["TribalShaman", "TribalElder"]));
+                Assert.That(maps.CanOpenMap(shaman, treeMap), Is.True);
+                Assert.That(maps.CanOpenMap(elder, treeMap), Is.True);
+                Assert.That(maps.CanOpenMap(tribal, treeMap), Is.False);
+                Assert.That(maps.CanOpenMap(tribal, new WastelandMapComponent()), Is.True);
+                Assert.That(maps.CanOpenMap(tribal, new WastelandMapComponent { ActivatorJobs = [] }), Is.True);
+            });
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
     [Test]
     public async Task TreeAnnouncementUsesTreeConfigAndKeepsDefaultSignalSettings()
     {

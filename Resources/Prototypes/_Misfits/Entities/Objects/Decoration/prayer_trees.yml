@@ -91,3 +91,14 @@
       interfaces:
         enum.SmokeSignalUiKey.Key:
           type: SmokeSignalBoundUserInterface
+        enum.WastelandMapUiKey.Key:
+          type: WastelandMapBoundUserInterface
+    # #Misfits Add - Willower leadership pendant-tracking TacMap.
+    - type: WastelandMap
+      mapTitle: Willowers Tree of Life
+      tacticalFeed: Tribe
+      activatorJobs: [ TribalShaman, TribalElder ]
+    - type: ActivatableUI
+      inHandsOnly: false
+      singleUser: true
+      key: enum.WastelandMapUiKey.Key

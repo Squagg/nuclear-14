@@ -672,6 +672,11 @@
     state: sawbone
   - type: PresetIdCard
     job: TribalShaman # #Misfits Fix - updated job ID after TribalHealer was renamed to TribalShaman
+  # #Misfits Add - enables Tree TacMap tracking without dropping the inherited door tag.
+  - type: Tag
+    tags:
+    - IdCardTribe
+    - DoorBumpOpener
   - type: ClothingAddFaction
     faction: Tribal
 
@@ -686,6 +691,11 @@
     state: raider
   - type: PresetIdCard
     job: Tribal
+  # #Misfits Add - enables Tree TacMap tracking without dropping the inherited door tag.
+  - type: Tag
+    tags:
+    - IdCardTribe
+    - DoorBumpOpener
   - type: ClothingAddFaction
     faction: Tribal
 
@@ -700,6 +710,11 @@
     state: enforcer
   - type: PresetIdCard
     job: TribalFarmer
+  # #Misfits Add - enables Tree TacMap tracking without dropping the inherited door tag.
+  - type: Tag
+    tags:
+    - IdCardTribe
+    - DoorBumpOpener
   - type: ClothingAddFaction
     faction: Tribal
 
@@ -714,6 +729,11 @@
     state: boss
   - type: PresetIdCard
     job: TribalElder
+  # #Misfits Add - enables Tree TacMap tracking without dropping the inherited door tag.
+  - type: Tag
+    tags:
+    - IdCardTribe
+    - DoorBumpOpener
   - type: ClothingAddFaction
     faction: Tribal
 
