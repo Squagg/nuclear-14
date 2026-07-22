@@ -4,6 +4,7 @@ using Content.Server._Misfits.SmokeSignal;
 using Content.Server._Misfits.WastelandMap;
 using Content.Shared.Access.Components;
 using Content.Shared._Misfits.SmokeSignal;
+using Content.Shared._Misfits.TribalHunt;
 using Content.Shared._Misfits.WastelandMap;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -38,10 +39,21 @@ public sealed class WillowerTreeCommunicationsTest
 
         await server.WaitAssertion(() =>
         {
-            var pendant = entities.SpawnEntity("N14IDTribeBossPendant", new EntityCoordinates(map.Grid, 1f, 1f));
-            var tribalCard = entities.SpawnEntity("MisfitsRobotNavCardTribal", new EntityCoordinates(map.Grid, 2f, 2f));
-            var ordinaryCard = entities.SpawnEntity("MisfitsRobotNavCardRobCo", new EntityCoordinates(map.Grid, 3f, 3f));
-            entities.GetComponent<IdCardComponent>(pendant).FullName = "Willow Chieftan";
+            var pendants = new[]
+            {
+                entities.SpawnEntity("N14IDTribeBossPendant", new EntityCoordinates(map.Grid, 1f, 1f)),
+                entities.SpawnEntity("N14IDTribeSawbonePendant", new EntityCoordinates(map.Grid, 2f, 1f)),
+                entities.SpawnEntity("N14IDTribeEnforcerPendant", new EntityCoordinates(map.Grid, 3f, 1f)),
+                entities.SpawnEntity("N14IDTribeBulletsPendant", new EntityCoordinates(map.Grid, 4f, 1f)),
+            };
+            var tribalCard = entities.SpawnEntity("MisfitsRobotNavCardTribal", new EntityCoordinates(map.Grid, 5f, 1f));
+            var ordinaryCard = entities.SpawnEntity("MisfitsRobotNavCardRobCo", new EntityCoordinates(map.Grid, 6f, 1f));
+            var huntTarget = entities.SpawnEntity(null, new EntityCoordinates(map.Grid, 7f, 1f));
+            var legendary = entities.EnsureComponent<LegendaryCreatureComponent>(huntTarget);
+            legendary.CreatureName = "Test Hunt";
+            var names = new[] { "Chieftan", "Shaman", "Farmer", "Tribal" };
+            for (var i = 0; i < pendants.Length; i++)
+                entities.GetComponent<IdCardComponent>(pendants[i]).FullName = names[i];
             entities.GetComponent<IdCardComponent>(tribalCard).FullName = "Spirit-Tender";
 
             var component = new WastelandMapComponent
@@ -52,13 +64,26 @@ public sealed class WillowerTreeCommunicationsTest
                 ActivatorJobs = ["TribalShaman", "TribalElder"],
             };
             var state = maps.BuildState(component, map.MapId);
+            component.TacticalFeed = WastelandMapTacticalFeedKind.Brotherhood;
+            var existingFeedState = maps.BuildState(component, map.MapId);
 
             Assert.Multiple(() =>
             {
-                Assert.That(tags.HasTag(pendant, "IdCardTribe"), Is.True);
+                Assert.That(pendants.All(pendant => tags.HasTag(pendant, "IdCardTribe")), Is.True);
                 Assert.That(tags.HasTag(tribalCard, "IdCardTribe"), Is.True);
                 Assert.That(tags.HasTag(ordinaryCard, "IdCardTribe"), Is.False);
-                Assert.That(state.TrackedBlips.Select(x => x.Label), Is.EquivalentTo(new[] { "Willow Chieftan (Willowers Chieftan)", "Spirit-Tender (Protectron Spirit-Tender)" }));
+                Assert.That(maps.AllowsSharedOverlays(WastelandMapTacticalFeedKind.Tribe), Is.False);
+                Assert.That(maps.AllowsSharedOverlays(WastelandMapTacticalFeedKind.Brotherhood), Is.True);
+                Assert.That(state.TrackedBlips.Any(x => x.Kind == WastelandMapTrackedBlipKind.TribalHuntTarget), Is.False);
+                Assert.That(existingFeedState.TrackedBlips.Any(x => x.Kind == WastelandMapTrackedBlipKind.TribalHuntTarget), Is.True);
+                Assert.That(state.TrackedBlips.Select(x => x.Label), Is.EquivalentTo(new[]
+                {
+                    "Chieftan (Willowers Chieftan)",
+                    "Shaman (Willowers Shaman)",
+                    "Farmer (Willowers Farmer)",
+                    "Tribal (Willowers Tribal)",
+                    "Spirit-Tender (Protectron Spirit-Tender)",
+                }));
                 Assert.That(state.TrackedBlips.All(x => x.Kind == WastelandMapTrackedBlipKind.Willower), Is.True);
             });
         });
@@ -190,9 +215,23 @@ public sealed class WillowerTreeCommunicationsTest
                 Assert.That(signals.CanUse(shaman, component), Is.True);
                 Assert.That(signals.CanUse(elder, component), Is.True);
                 Assert.That(signals.CanUse(tribal, component), Is.False);
-                Assert.That(signals.GetRecipients(component.TargetDepartment),
+                Assert.That(signals.GetRecipients(component),
                     Is.EquivalentTo(new[] { shaman, elder, tribal, superMutant, protectron }));
             });
+
+            var defaultSignal = entities.GetComponent<SmokeSignalComponent>(
+                entities.SpawnEntity("MisfitsTribalSignalFire", map.GridCoords));
+            Assert.Multiple(() =>
+            {
+                Assert.That(signals.CanUse(superMutant, defaultSignal), Is.False);
+                Assert.That(signals.CanUse(protectron, defaultSignal), Is.False);
+                Assert.That(signals.GetRecipients(defaultSignal),
+                    Is.EquivalentTo(new[] { shaman, elder, tribal }));
+            });
+
+            entities.EventBus.RaiseLocalEvent(tree, new SmokeSignalSendMessage("   ") { Actor = shaman });
+            entities.EventBus.RaiseLocalEvent(tree, new SmokeSignalSendMessage("unauthorized") { Actor = tribal });
+            Assert.That(component.CooldownEnd, Is.Null);
 
             entities.RemoveComponent<ActorComponent>(shaman);
             entities.RemoveComponent<ActorComponent>(elder);

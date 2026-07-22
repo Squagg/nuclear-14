@@ -123,8 +123,8 @@ public sealed class SmokeSignalSystem : EntitySystem
         // Build the broadcast text
         var broadcastText = Loc.GetString(component.BroadcastMessage, ("message", message)); // #Misfits Change - allow Tree-specific wording
 
-        // #Misfits Change - use the tested living department recipient selection.
-        foreach (var playerUid in GetRecipients(component.TargetDepartment))
+        // #Misfits Change - preserve each signal's department compatibility mode for delivery.
+        foreach (var playerUid in GetRecipients(component))
             _popup.PopupEntity(broadcastText, playerUid, playerUid, PopupType.Large);
 
         // Also send an atmospheric notice to nearby non-tribe bystanders
@@ -143,8 +143,8 @@ public sealed class SmokeSignalSystem : EntitySystem
                 if (_mobState.IsDead(nearbyUid))
                     continue;
 
-                // Tribe members already got the full message above; skip duplicates
-                if (IsInDepartment(nearbyUid, component.TargetDepartment))
+                // #Misfits Change - only full-message recipients skip the nearby notice.
+                if (IsInDepartment(nearbyUid, component))
                     continue;
 
                 _popup.PopupEntity(nearbyText, nearbyUid, nearbyUid, PopupType.Medium);
@@ -176,38 +176,42 @@ public sealed class SmokeSignalSystem : EntitySystem
         return true;
     }
 
-    // #Misfits Change - exact department membership supports dual-department Willower roles.
+    // #Misfits Change - Tree allowlists use exact membership while legacy signals retain first-department behavior.
     internal bool CanUse(EntityUid uid, SmokeSignalComponent component)
     {
         if (!_mind.TryGetMind(uid, out var mindId, out _)
             || !_jobs.MindTryGetJob(mindId, out _, out var job))
             return false;
 
-        if (!_prototypes.TryIndex<DepartmentPrototype>(component.TargetDepartment, out var department)
-            || !department.Roles.Contains(job.ID))
-            return false;
+        if (component.ActivatorJobs is not { Count: > 0 })
+            return _jobs.TryGetDepartment(job.ID, out var department) && department.ID == component.TargetDepartment;
 
-        return component.ActivatorJobs is not { Count: > 0 }
-            || component.ActivatorJobs.Contains(job.ID);
+        return _prototypes.TryIndex<DepartmentPrototype>(component.TargetDepartment, out var targetDepartment)
+            && targetDepartment.Roles.Contains(job.ID)
+            && component.ActivatorJobs.Contains(job.ID);
     }
 
-    internal bool IsInDepartment(EntityUid uid, string departmentId)
+    // #Misfits Change - recipients follow the same Tree-versus-legacy department compatibility mode as authorization.
+    internal bool IsInDepartment(EntityUid uid, SmokeSignalComponent component)
     {
         if (!_mind.TryGetMind(uid, out var mindId, out _)
-            || !_jobs.MindTryGetJob(mindId, out _, out var job)
-            || !_prototypes.TryIndex<DepartmentPrototype>(departmentId, out var department))
+            || !_jobs.MindTryGetJob(mindId, out _, out var job))
             return false;
 
-        return department.Roles.Contains(job.ID);
+        if (component.ActivatorJobs is not { Count: > 0 })
+            return _jobs.TryGetDepartment(job.ID, out var department) && department.ID == component.TargetDepartment;
+
+        return _prototypes.TryIndex<DepartmentPrototype>(component.TargetDepartment, out var targetDepartment)
+            && targetDepartment.Roles.Contains(job.ID);
     }
 
-    // #Misfits Add - share exact living Actor selection between delivery and regression coverage.
-    internal IEnumerable<EntityUid> GetRecipients(string departmentId)
+    // #Misfits Change - share component-specific living recipient selection between delivery and regression coverage.
+    internal IEnumerable<EntityUid> GetRecipients(SmokeSignalComponent component)
     {
         var query = EntityQueryEnumerator<ActorComponent>();
         while (query.MoveNext(out var playerUid, out _))
         {
-            if (_mobState.IsDead(playerUid) || !IsInDepartment(playerUid, departmentId))
+            if (_mobState.IsDead(playerUid) || !IsInDepartment(playerUid, component))
                 continue;
 
             yield return playerUid;

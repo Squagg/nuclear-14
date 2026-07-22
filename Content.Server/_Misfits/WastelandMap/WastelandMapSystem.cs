@@ -432,14 +432,15 @@ public sealed class WastelandMapSystem : EntitySystem
         {
             _blipScratch.Clear();
             AppendFactionBlips(_blipScratch, feed, mapId, bounds);
-            AppendTribalHuntTargetBlips(_blipScratch, mapId, bounds);
+            if (AllowsSharedOverlays(feed)) // #Misfits Change - Tribe maps are tagged-ID-only.
+                AppendTribalHuntTargetBlips(_blipScratch, mapId, bounds);
             nonActorBlips = _blipScratch.ToArray();
             if (_inUpdateSweep)
                 _nonActorCache[cacheKey] = nonActorBlips;
         }
 
         // Group blips are per-actor and therefore never cached across viewers.
-        if (actor.HasValue)
+        if (actor.HasValue && AllowsSharedOverlays(feed)) // #Misfits Change - Tribe maps exclude viewer-specific group overlays.
         {
             _groupScratch.Clear();
             AppendGroupMemberBlips(_groupScratch, actor.Value, mapId, bounds);
@@ -454,6 +455,12 @@ public sealed class WastelandMapSystem : EntitySystem
         }
 
         return nonActorBlips;
+    }
+
+    // #Misfits Add - keep the Tribe feed limited to its explicitly tagged identification items.
+    internal bool AllowsSharedOverlays(WastelandMapTacticalFeedKind feed)
+    {
+        return feed != WastelandMapTacticalFeedKind.Tribe;
     }
 
     // #Misfits Add - Append the faction blip set for this feed into the supplied buffer.
