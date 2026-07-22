@@ -12,7 +12,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Tag;
-using Robust.Server.Player;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
@@ -152,19 +151,13 @@ public sealed class WillowerTreeCommunicationsTest
     [Test]
     public async Task TreeAnnouncementDeliversToLivingWillowersAndSharesCooldown()
     {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Connected = true,
-            Dirty = true,
-            DummyTicker = false,
-        });
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Dirty = true });
         var server = pair.Server;
         var map = await pair.CreateTestMap();
         var entities = server.ResolveDependency<IEntityManager>();
         var minds = entities.System<SharedMindSystem>();
         var roles = entities.System<SharedRoleSystem>();
         var signals = entities.System<SmokeSignalSystem>();
-        var playerManager = server.ResolveDependency<IPlayerManager>();
         var timing = server.ResolveDependency<IGameTiming>();
 
         await server.WaitAssertion(() =>
@@ -182,10 +175,7 @@ public sealed class WillowerTreeCommunicationsTest
                 return body;
             }
 
-            var shaman = playerManager.Sessions.Single().AttachedEntity!.Value;
-            Assert.That(minds.TryGetMind(shaman, out var shamanMind, out _), Is.True);
-            roles.MindAddRole(shamanMind, new JobComponent { Prototype = "TribalShaman" });
-
+            var shaman = SpawnWithJob("TribalShaman");
             var elder = SpawnWithJob("TribalElder");
             var tribal = SpawnWithJob("Tribal");
             var superMutant = SpawnWithJob("SuperMutantTribal");
@@ -204,6 +194,7 @@ public sealed class WillowerTreeCommunicationsTest
                     Is.EquivalentTo(new[] { shaman, elder, tribal, superMutant, protectron }));
             });
 
+            entities.RemoveComponent<ActorComponent>(shaman);
             entities.RemoveComponent<ActorComponent>(elder);
             entities.RemoveComponent<ActorComponent>(tribal);
             entities.RemoveComponent<ActorComponent>(superMutant);
@@ -212,12 +203,12 @@ public sealed class WillowerTreeCommunicationsTest
             entities.RemoveComponent<ActorComponent>(deadTribal);
 
             var longMessage = new SmokeSignalSendMessage(new string('x', 129)) { Actor = shaman };
-            entities.EventBus.RaiseComponentEvent(tree, component, longMessage);
+            entities.EventBus.RaiseLocalEvent(tree, longMessage);
             var cooldownEnd = component.CooldownEnd;
 
             Assert.That(cooldownEnd, Is.EqualTo(timing.CurTime + TimeSpan.FromSeconds(300)));
 
-            entities.EventBus.RaiseComponentEvent(tree, component, new SmokeSignalSendMessage("second") { Actor = elder });
+            entities.EventBus.RaiseLocalEvent(tree, new SmokeSignalSendMessage("second") { Actor = elder });
             Assert.That(component.CooldownEnd, Is.EqualTo(cooldownEnd));
         });
 
