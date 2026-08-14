@@ -18,3 +18,23 @@
     tags:
     - HideContextMenu
   - type: AnimationPlayer
+
+# #Misfits Add - Ground impact when a power armoured passenger drops from the vertibird.
+- type: entity
+  id: VertibirdCombatDropImpactEffect
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.4
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    scale: 1.4, 1.4
+    layers:
+    - sprite: Effects/rockspawn.rsi
+      state: asteroid
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: AnimationPlayer

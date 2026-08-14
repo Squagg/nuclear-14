@@ -64,6 +64,8 @@
     bounciness: 0.05
   # #Misfits Add - co-pilot turret. Ammunition is the LimitedCharges below.
   - type: VertibirdTurret
+  # #Misfits Add - power armoured passengers can drop out while cruising.
+  - type: VertibirdCombatDrop
   - type: LimitedCharges
     maxCharges: 12
     charges: 12

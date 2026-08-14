@@ -45,3 +45,12 @@ vertibird-repair-success = You weld the vertibird's airframe back into shape.
 vertibird-restock-full = The gun is already fully loaded.
 vertibird-restock-success = You feed the belt into the gun. {$rounds} bursts loaded.
 
+# #Misfits Add - Power armour combat drop.
+action-name-vertibird-combat-drop = Combat drop
+action-description-vertibird-combat-drop = Step out of the cruising vertibird. Your power armour takes the landing for you.
+
+vertibird-drop-not-cruising = The vertibird has to be cruising before you can drop.
+vertibird-drop-needs-power-armor = Without a suit, that fall would kill you.
+vertibird-drop-no-ground = There is no level beneath the vertibird to drop onto.
+vertibird-rp-combat-drop = disgorges an armoured figure that drops away toward the ground below.
+

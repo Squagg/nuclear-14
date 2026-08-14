@@ -66,6 +66,7 @@ public sealed partial class VertibirdSystem : EntitySystem
         SubscribeNetworkEvent<VertibirdControlInputMessage>(OnControlInput);
 
         InitializeTurret();
+        InitializeCombatDrop();
     }
 
     public override void Update(float frameTime)
@@ -139,6 +140,7 @@ public sealed partial class VertibirdSystem : EntitySystem
         }
 
         RefreshTurretSeat(ent, seatIndex, occupant);
+        RefreshCombatDropSeat(ent, occupant, boarding: true);
 
         Dirty(ent);
         UpdateUi(ent);
@@ -172,6 +174,7 @@ public sealed partial class VertibirdSystem : EntitySystem
                 RefreshTurretSeat(ent, seat.Value, null);
             }
 
+            RefreshCombatDropSeat(ent, args.Buckle.Owner, boarding: false);
             UnhideOccupant(args.Buckle.Owner);
             Dirty(ent);
             UpdateUi(ent);
@@ -188,6 +191,8 @@ public sealed partial class VertibirdSystem : EntitySystem
             ent.Comp.SeatOccupants[pilotSeat.Value] = null;
             RefreshTurretSeat(ent, pilotSeat.Value, null);
         }
+
+        RefreshCombatDropSeat(ent, args.Buckle.Owner, boarding: false);
 
         UnhideOccupant(args.Buckle.Owner);
         Dirty(ent);
