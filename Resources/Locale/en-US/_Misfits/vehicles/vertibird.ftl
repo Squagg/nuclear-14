@@ -12,6 +12,7 @@ vertibird-unbuckle-blocked = You cannot unbuckle until the vertibird begins land
 vertibird-use-seat-manifest = Use the vertibird seat manifest to board.
 vertibird-seat-airborne-blocked = You cannot change seats while the vertibird is airborne.
 vertibird-seat-pilot = Pilot seat
+vertibird-seat-copilot = Co-pilot seat (turret)
 vertibird-seat-passenger = Passenger seat {$number}
 vertibird-seat-empty = Empty
 vertibird-seat-board = Board
@@ -28,3 +29,19 @@ vertibird-rp-takeoff = lifts from the ground in a hard wash of rotor noise.
 vertibird-rp-landing = settles back onto the ground as the rotors wind down.
 vertibird-rp-z-up = climbs toward the sky for cruising.
 vertibird-rp-z-down = descends toward the ground for ground effect flight.
+
+# #Misfits Add - Co-pilot turret, restocking and airframe repair.
+action-name-vertibird-enter-turret = Man turret
+action-description-vertibird-enter-turret = Drop into the gunner's sight and look down on the level below. Your body stays in the seat.
+action-name-vertibird-exit-turret = Leave turret
+action-description-vertibird-exit-turret = Return to your body in the co-pilot seat.
+action-name-vertibird-fire-turret = Fire turret
+action-description-vertibird-fire-turret = Rake the targeted ground with a burst from the chin gun.
+
+vertibird-turret-needs-altitude = The turret only bears on the ground while cruising above a level.
+vertibird-turret-no-ammo = The gun is empty. It needs a fresh belt.
+vertibird-repair-undamaged = The airframe is already sound.
+vertibird-repair-success = You weld the vertibird's airframe back into shape.
+vertibird-restock-full = The gun is already fully loaded.
+vertibird-restock-success = You feed the belt into the gun. {$rounds} bursts loaded.
+

@@ -64,11 +64,15 @@ public sealed partial class VertibirdSystem : EntitySystem
         SubscribeLocalEvent<VertibirdComponent, AfterActivatableUIOpenEvent>(OnAfterUiOpen);
         SubscribeLocalEvent<VertibirdComponent, VertibirdSelectSeatMessage>(OnSelectSeat);
         SubscribeNetworkEvent<VertibirdControlInputMessage>(OnControlInput);
+
+        InitializeTurret();
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        UpdateTurretEyes();
 
         var query = EntityQueryEnumerator<VertibirdComponent, MZPhysicsComponent, PhysicsComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var vertibird, out var mzPhysics, out var physics, out var xform))
@@ -134,6 +138,8 @@ public sealed partial class VertibirdSystem : EntitySystem
             AddPilotActions(occupant, ent);
         }
 
+        RefreshTurretSeat(ent, seatIndex, occupant);
+
         Dirty(ent);
         UpdateUi(ent);
     }
@@ -161,7 +167,10 @@ public sealed partial class VertibirdSystem : EntitySystem
         {
             var seat = GetSeatIndex(ent.Comp, args.Buckle.Owner);
             if (seat != null)
+            {
                 ent.Comp.SeatOccupants[seat.Value] = null;
+                RefreshTurretSeat(ent, seat.Value, null);
+            }
 
             UnhideOccupant(args.Buckle.Owner);
             Dirty(ent);
@@ -175,7 +184,10 @@ public sealed partial class VertibirdSystem : EntitySystem
 
         var pilotSeat = GetSeatIndex(ent.Comp, args.Buckle.Owner);
         if (pilotSeat != null)
+        {
             ent.Comp.SeatOccupants[pilotSeat.Value] = null;
+            RefreshTurretSeat(ent, pilotSeat.Value, null);
+        }
 
         UnhideOccupant(args.Buckle.Owner);
         Dirty(ent);
@@ -588,6 +600,9 @@ public sealed partial class VertibirdSystem : EntitySystem
                 AddPilotActions(user, ent);
             }
 
+            RefreshTurretSeat(ent, currentSeat.Value, null);
+            RefreshTurretSeat(ent, seatIndex, user);
+
             Dirty(ent);
             UpdateUi(ent);
             return;
@@ -662,12 +677,23 @@ public sealed partial class VertibirdSystem : EntitySystem
             var occupant = vertibird.SeatOccupants[i];
             seats[i] = new VertibirdSeatUiState(
                 i,
-                i == 0 ? Loc.GetString("vertibird-seat-pilot") : Loc.GetString("vertibird-seat-passenger", ("number", i)),
+                GetSeatName(i),
                 occupant == null ? null : Identity.Name(occupant.Value, EntityManager),
                 i == 0);
         }
 
         return new VertibirdSeatBoundUserInterfaceState(vertibird.State, seats);
+    }
+
+    private string GetSeatName(int index)
+    {
+        return index switch
+        {
+            0 => Loc.GetString("vertibird-seat-pilot"),
+            // #Misfits Add - seat 1 mans the turret.
+            1 => Loc.GetString("vertibird-seat-copilot"),
+            _ => Loc.GetString("vertibird-seat-passenger", ("number", index)),
+        };
     }
 
     private void SendVertibirdEmote(EntityUid vertibird, string locId)

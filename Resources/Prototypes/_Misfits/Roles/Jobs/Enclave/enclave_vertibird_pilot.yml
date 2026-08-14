@@ -35,6 +35,7 @@
           - Enclave
       - type: PowerArmorProficiency
       - type: VertibirdPilotPerk # #Misfits Add - pilot perk granted free with the role
+      - type: VertibirdCrew # #Misfits Add - trained crew repair the airframe faster
 
 - type: startingGear
   id: EnclaveVertibirdPilotGear

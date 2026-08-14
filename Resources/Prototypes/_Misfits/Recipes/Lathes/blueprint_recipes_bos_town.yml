@@ -2752,3 +2752,18 @@
     Leather: 50
 
 
+
+# #Misfits Add - Vertibird turret ammunition belt.
+- type: latheRecipe
+  id: N14BPBoSAmmoVertibirdGunBelt
+  result: N14VertibirdGunBelt
+  category: N14BlueprintBoSAmmoT4
+  completetime: 15
+  requiresBlueprint: true
+  availableFaction:
+  - BrotherhoodOfSteel
+  materials:
+    Lead: 1200
+    N14Brass: 600
+    N14Gunpowder: 600
+    Steel: 400

@@ -678,6 +678,7 @@
     recipes:
     - N14BPBoSAmmoFusionCoreRed
     # #Misfits Change - duplicate FC recipe removed; consolidated to single generic fusion core
+    - N14BPBoSAmmoVertibirdGunBelt # #Misfits Add - vertibird turret belt
 
 # #Misfits Removed - T5 ammo blueprint entity commented out; all T5 energy cells consolidated to generic types at T1
 # - type: entity
