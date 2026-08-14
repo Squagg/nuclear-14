@@ -131,7 +131,7 @@
         - BoSMidPaladinCommander
         - BoSMidPaladin
         - BoSMidKnight
-        - BoSKnightPilot
+        - BoSLancerCaptain
         - BoSMidSquire
         - BoSWestElderCommander # Misfits Change /Add/: expand access to all BoS roles
         - BoSHeadKnight
@@ -158,7 +158,9 @@
         - BoSMidPaladinCommander
         - BoSMidPaladin
         - BoSMidKnight
-        - BoSKnightPilot
+        - BoSLancerCaptain
+        - BoSLancerKnight
+        - BoSLancer
         - BoSWestElderCommander # Misfits Change /Add/: expand access to all BoS roles
         - BoSHeadKnight
         - BoSWestScribe

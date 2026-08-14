@@ -1,0 +1,59 @@
+# #Misfits Add - Lancer-Knight: vertibird crew chief and door gunner. Mans the turret
+# from the co-pilot seat and keeps the craft fed with ammunition.
+
+- type: job
+  id: BoSLancerKnight
+  setPreference: true
+  hideIfPlaytimeRequirementsNotMet: false
+  jobWhitelistBypassesRoleTimers: true
+  weight: 45
+  overrideConsoleVisibility: true
+  canBeAntag: false
+  name: job-name-bos-lancer-knight
+  overwatchCategory: OverwatchBosKnight
+  description: job-description-bos-lancer-knight
+  playTimeTracker: BoSLancerKnight
+  requirements:
+    - !type:CharacterSpeciesRequirement # BoS does not accept Ghouls or Glowing Ghouls
+      species:
+      - Human
+    - !type:CharacterDepartmentTimeRequirement # 10h on the flight line
+      department: BrotherhoodOfSteelLancers
+      min: 36000 # 10 hours
+  startingGear: BoSLancerKnightGear
+  alwaysUseSpawner: true
+  icon: "JobIconBosMKnight"
+  supervisors: job-supervisors-bos-lancer-knight
+  accessGroups:
+  - BOSKnight
+  special:
+  - !type:AddComponentSpecial
+    components:
+      - type: NpcFactionMember
+        factions:
+          - BrotherhoodOfSteel
+      - type: VertibirdCrew # #Misfits Add - trained crew repair the airframe faster
+
+- type: startingGear
+  id: BoSLancerKnightGear
+  equipment:
+    jumpsuit: N14ClothingUniformJumpskirtBOSBlack
+    back: N14ClothingBackpackMilitary
+    shoes: N14ClothingBootsLeatherFilled
+    head: N14ClothingHeadHatCapkhighBoS
+    outerClothing: MisfitsBoSKnightArmor
+    hands: N14ClothingHandsGlovesCombat
+    eyes: N14ClothingEyesGlassesPilot
+    pocket1: BoSBrotherhoodKnightKits
+    id: N14IDBrotherhoodOfSteelHolotagKnight
+    ears: N14ClothingHeadsetBrotherhoodOfSteel
+    belt: ClothingBeltBoSWebbing
+  storage:
+    back:
+    - N14ClothingHeadHatBrotherhoodHelmetMK2
+    - N14BoxPlasticFilledMilitary
+    # The gunner carries the reload for the craft's chin gun.
+    - N14VertibirdGunBelt
+
+- type: playTimeTracker
+  id: BoSLancerKnight

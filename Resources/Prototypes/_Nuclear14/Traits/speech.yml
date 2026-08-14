@@ -115,7 +115,9 @@
     - NCRCadet
     - BoSMidScribe
     - BoSMidKnight
-    - BoSKnightPilot
+    - BoSLancerCaptain
+    - BoSLancerKnight
+    - BoSLancer
     - BoSMidSquire
     - CaesarLegionCenturion
     - CaesarLegionLegate

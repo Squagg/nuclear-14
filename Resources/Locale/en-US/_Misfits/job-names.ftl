@@ -148,8 +148,13 @@ job-name-bos-paladin = Brotherhood Paladin
 job-description-bos-paladin = Fight as the Brotherhood's frontline heavy infantry and defend the chapter's interests.
 job-name-bos-knight = Brotherhood Knight
 job-description-bos-knight = Protect the chapter, escort missions, and recover technology in the field.
-job-name-bos-knight-pilot = Brotherhood Knight-Pilot
-job-description-bos-knight-pilot = You are the chapter's aviator, a Knight trusted with recovered vertibird technology. Keep the bird flying, move the Brotherhood's people and salvage, and remember that the machine is Brotherhood property first and your ride second.
+# #Misfits Add - Brotherhood Lancers, the chapter's aviation branch.
+job-name-bos-lancer-captain = Brotherhood Lancer-Captain
+job-description-bos-lancer-captain = You command the chapter's Lancers and fly its vertibird. Keep the bird in the air, move the Brotherhood's people and salvage, and remember that the machine is Brotherhood property first and your ride second.
+job-name-bos-lancer-knight = Brotherhood Lancer-Knight
+job-description-bos-lancer-knight = You are the crew chief. You ride the co-pilot seat, work the turret over whatever the Captain flies you across, and keep the gun fed. When the bird is down you are on the airframe with everyone else.
+job-name-bos-lancer = Brotherhood Lancer
+job-description-bos-lancer = You are deck crew. The vertibird comes back chewed up and it is your torch that puts it right, your hands that clear the pad and load the cargo. Nobody flies anywhere without you.
 job-name-bos-scribe = Brotherhood Scribe
 job-description-bos-scribe = Support the chapter with research, medicine, and technical expertise.
 job-name-bos-initiate = Brotherhood Initiate

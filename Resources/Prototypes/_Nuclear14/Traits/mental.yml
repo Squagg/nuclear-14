@@ -70,7 +70,9 @@
         - BoSPaladinCommander # #Cythisiax Added - personal-whitelist Paladin Commander is a combat role
         - BoSMidPaladin
         - BoSMidKnight
-        - BoSKnightPilot
+        - BoSLancerCaptain
+        - BoSLancerKnight
+        - BoSLancer
         - BoSMidSquire
         # Forge-Change-Start
         #- BoSMidInquisitor # Misfits Fix: job prototype commented out

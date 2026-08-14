@@ -719,7 +719,9 @@
         - BoSScribe
         - BoSPaladin
         - BoSMidKnight
-        - BoSKnightPilot
+        - BoSLancerCaptain
+        - BoSLancerKnight
+        - BoSLancer
         - BoSMidPaladin
         - BoSWestScribe
         - BoSMidScribe
@@ -742,7 +744,7 @@
         - BoSScribe
         - BoSPaladin
         - BoSMidKnight
-        - BoSKnightPilot
+        - BoSLancerCaptain
         - BoSMidPaladin
         - BoSWestScribe
         - BoSMidScribe
@@ -765,7 +767,9 @@
         - BoSScribe
         - BoSPaladin
         - BoSMidKnight
-        - BoSKnightPilot
+        - BoSLancerCaptain
+        - BoSLancerKnight
+        - BoSLancer
         - BoSMidPaladin
         - BoSWestScribe
         - BoSMidScribe

@@ -40,7 +40,9 @@
     #- BoSMidInquisitor # Misfits Fix: job prototype commented out
     - BoSMidScribe
     - BoSMidKnight
-    - BoSKnightPilot
+    - BoSLancerCaptain
+    - BoSLancerKnight
+    - BoSLancer
     - BoSMidSquire
     - CaesarLegionCenturion
     - CaesarLegionLegate

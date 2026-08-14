@@ -96,7 +96,10 @@
           BoSWestScribe: [ 1, 1 ] # Misfits Change
           BoSMidPaladin: [ 1, 1 ]  #Misfits Tweak: 1 slot — Senior Paladin is a rare rank
           BoSMidKnight: [ 3, 3 ]
-          BoSKnightPilot: [ 1, 1 ] # #Misfits Add
+          # #Misfits Add - Brotherhood Lancers aviation branch
+          BoSLancerCaptain: [ 1, 1 ]
+          BoSLancerKnight: [ 2, 2 ]
+          BoSLancer: [ 2, 2 ]
           BoSMidScribe: [ 3, 3 ]
           BoSPaladin: [ 3, 3 ]  #Misfits Tweak: 3 slots — standard Paladin complement
           BoSKnight: [ 3, 3 ]  #Misfits Change /Add/

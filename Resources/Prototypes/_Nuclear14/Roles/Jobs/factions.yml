@@ -42,7 +42,7 @@
   - BoSMidPaladin                # Senior Paladin | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_seniorpaladin.yml
   - BoSMidKnight                 # Senior Knight  | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_seniorknight.yml
   - BoSMidScribe                 # Senior Scribe  | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_seniorscribe.yml
-  - BoSKnightPilot               # Knight-Pilot   | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_knight_pilot.yml  #Misfits Add
+  #Misfits Change - the aviator role moved into its own Lancers department below.
   # Members
   #- BoSWashingtonPaladin         # Paladin (old Washington)
   #- BoSWashingtonKnight          # Knight (old Washington)
@@ -55,6 +55,20 @@
   - BoSOffDuty                   # Off-duty       | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_off_duty.yml
   #- BoSWashingtonInitiate        # Initiate (old Washington)
   - BoSInitiate                  # Initiate       | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_initiate.yml  #Misfits Change /Add/
+
+# #Misfits Add - Brotherhood Lancers: the chapter's aviation branch, styled after the
+# Rangers/MilitaryPolice pattern of a sub-branch with its own department block.
+# The ID deliberately extends BrotherhoodOfSteel so ordinal sorting parks it directly
+# beneath the Brotherhood in the character selection screen.
+- type: department
+  id: BrotherhoodOfSteelLancers
+  description: department-BrotherhoodOfSteelLancers-description
+  color: "#2F5D8C" # deeper Wendover blue, distinct from the chapter's #3B72BF
+  uiCategory: MajorFaction
+  roles:
+  - BoSLancerCaptain # Lancer-Captain | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_lancer_captain.yml
+  - BoSLancerKnight  # Lancer-Knight  | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_lancer_knight.yml
+  - BoSLancer        # Lancer         | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_lancer.yml
 
 #- type: department
 #  id: CaravanCompany

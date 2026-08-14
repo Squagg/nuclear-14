@@ -1,0 +1,59 @@
+# #Misfits Add - Lancer: vertibird deck crew. Keeps the airframe welded together and the
+# landing pad clear. Entry rung of the Lancers ladder, open to established chapter members.
+
+- type: job
+  id: BoSLancer
+  setPreference: true
+  hideIfPlaytimeRequirementsNotMet: false
+  jobWhitelistBypassesRoleTimers: true
+  weight: 30
+  overrideConsoleVisibility: true
+  canBeAntag: false
+  name: job-name-bos-lancer
+  overwatchCategory: OverwatchBosSupport
+  description: job-description-bos-lancer
+  playTimeTracker: BoSLancer
+  requirements:
+    - !type:CharacterSpeciesRequirement # BoS does not accept Ghouls or Glowing Ghouls
+      species:
+      - Human
+    # Entry rung gates on chapter service rather than Lancers time, otherwise nobody
+    # could ever accumulate the hours the two ranks above it require.
+    - !type:CharacterDepartmentTimeRequirement # T3 faction timelock (8h BoS)
+      department: BrotherhoodOfSteel
+      min: 28800 # 8 hours
+  startingGear: BoSLancerGear
+  alwaysUseSpawner: true
+  icon: "JobIconBosMSquire"
+  supervisors: job-supervisors-bos-lancer
+  accessGroups:
+  - BOSKnight
+  special:
+  - !type:AddComponentSpecial
+    components:
+      - type: NpcFactionMember
+        factions:
+          - BrotherhoodOfSteel
+      - type: VertibirdCrew # #Misfits Add - trained crew repair the airframe faster
+
+- type: startingGear
+  id: BoSLancerGear
+  equipment:
+    jumpsuit: N14ClothingUniformJumpskirtBOSBlack
+    back: N14ClothingBackpackMilitary
+    shoes: N14ClothingBootsLeatherFilled
+    head: N14ClothingHeadHatCapkhighBoS
+    outerClothing: MisfitsBoSSquireArmor
+    hands: N14ClothingHandsGlovesCombat
+    pocket1: BoSBrotherhoodSquireKits
+    id: N14IDBrotherhoodOfSteelHolotagInitiate
+    ears: N14ClothingHeadsetBrotherhoodOfSteel
+    belt: ClothingBeltBoSWebbing
+  storage:
+    back:
+    - N14BoxPlasticFilledMilitary
+    # Deck crew carry their own torch; the airframe repair needs a welding tool.
+    - Welder
+
+- type: playTimeTracker
+  id: BoSLancer

@@ -35,7 +35,9 @@ job-supervisors-bos-west = the Elder
 job-supervisors-bos-headknight = the Elder
 job-supervisors-bos-paladin = the Head Paladin and Elder
 job-supervisors-bos-knight = the Head Knight, and Elder
-job-supervisors-bos-knight-pilot = the Head Knight and Elder
+job-supervisors-bos-lancer-captain = the Head Knight and Elder
+job-supervisors-bos-lancer-knight = the Lancer-Captain and the Head Knight
+job-supervisors-bos-lancer = the Lancer-Captain and the Lancer-Knights
 job-supervisors-bos-scribe = the Head Scribe and Elder
 job-supervisors-bos-initiate = the Brotherhood chain of command
 

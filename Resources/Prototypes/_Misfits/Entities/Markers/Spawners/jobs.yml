@@ -37,18 +37,42 @@
       - state: green
       - state: knight
 
-# #Misfits Add - Knight-Pilot spawn point.
+# #Misfits Add - Brotherhood Lancers spawn points.
 - type: entity
   parent: MisfitsSpawnPointBoSMidPaladinCommander
-  id: MisfitsSpawnPointBoSKnightPilot
-  name: Brotherhood Knight-Pilot
+  id: MisfitsSpawnPointBoSLancerCaptain
+  name: Brotherhood Lancer-Captain
   components:
   - type: SpawnPoint
-    job_id: BoSKnightPilot
+    job_id: BoSLancerCaptain
   - type: Sprite
     layers:
       - state: green
       - state: knight
+
+- type: entity
+  parent: MisfitsSpawnPointBoSMidPaladinCommander
+  id: MisfitsSpawnPointBoSLancerKnight
+  name: Brotherhood Lancer-Knight
+  components:
+  - type: SpawnPoint
+    job_id: BoSLancerKnight
+  - type: Sprite
+    layers:
+      - state: green
+      - state: knight
+
+- type: entity
+  parent: MisfitsSpawnPointBoSMidPaladinCommander
+  id: MisfitsSpawnPointBoSLancer
+  name: Brotherhood Lancer
+  components:
+  - type: SpawnPoint
+    job_id: BoSLancer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: squire
 
 - type: entity
   parent: MisfitsSpawnPointBoSMidPaladinCommander
