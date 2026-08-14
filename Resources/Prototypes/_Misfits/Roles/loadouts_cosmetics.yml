@@ -337,6 +337,7 @@
         - NCRHeavyTrooper
         - NCRExecutiveOfficer
         - NCRPlatoonLeader
+        - NCRVertibirdPilot
         - NCRCommander
         - NCRMajor
         - NCRDoctor
@@ -548,6 +549,7 @@
         - NCRHeavyTrooper
         - NCRExecutiveOfficer
         - NCRPlatoonLeader
+        - NCRVertibirdPilot
         - NCRCommander
         - NCRMajor
         - NCRDoctor
@@ -564,6 +566,7 @@
       jobs:
         - NCRExecutiveOfficer
         - NCRPlatoonLeader
+        - NCRVertibirdPilot
         - NCRCommander
         - NCRMajor
   items:
@@ -619,6 +622,7 @@
         - NCRDoctor
         - NCRExecutiveOfficer
         - NCRPlatoonLeader
+        - NCRVertibirdPilot
         - NCRNCO
         - NCREngineer
         - NCRMedic
@@ -715,6 +719,7 @@
         - BoSScribe
         - BoSPaladin
         - BoSMidKnight
+        - BoSKnightPilot
         - BoSMidPaladin
         - BoSWestScribe
         - BoSMidScribe
@@ -737,6 +742,7 @@
         - BoSScribe
         - BoSPaladin
         - BoSMidKnight
+        - BoSKnightPilot
         - BoSMidPaladin
         - BoSWestScribe
         - BoSMidScribe
@@ -759,6 +765,7 @@
         - BoSScribe
         - BoSPaladin
         - BoSMidKnight
+        - BoSKnightPilot
         - BoSMidPaladin
         - BoSWestScribe
         - BoSMidScribe
@@ -806,6 +813,7 @@
         - EnclaveEnlisted
         - EnclaveNCO
         - EnclaveJuniorOfficer
+        - EnclaveVertibirdPilot
         - EnclaveSeniorOfficer
         - EnclaveCommander
         - EnclaveReformer
@@ -825,6 +833,7 @@
         - EnclaveEnlisted
         - EnclaveNCO
         - EnclaveJuniorOfficer
+        - EnclaveVertibirdPilot
         - EnclaveSeniorOfficer
         - EnclaveCommander
         - EnclaveReformer
@@ -839,6 +848,7 @@
     - !type:CharacterJobRequirement
       jobs:
         - EnclaveJuniorOfficer
+        - EnclaveVertibirdPilot
         - EnclaveSeniorOfficer
         - EnclaveCommander
         - EnclaveReformer
@@ -1229,6 +1239,7 @@
     - EnclaveEnlisted
     - EnclaveNCO
     - EnclaveJuniorOfficer
+    - EnclaveVertibirdPilot
     - EnclaveSeniorOfficer
     - EnclaveCommander
     - EnclaveJuniorScientist
@@ -1250,6 +1261,7 @@
     - EnclaveEnlisted
     - EnclaveNCO
     - EnclaveJuniorOfficer
+    - EnclaveVertibirdPilot
     - EnclaveSeniorOfficer
     - EnclaveCommander
     - EnclaveJuniorScientist
@@ -1281,6 +1293,7 @@
         - NCRHeavyTrooper
         - NCRExecutiveOfficer
         - NCRPlatoonLeader
+        - NCRVertibirdPilot
         - NCRCommander
         - NCRMajor
         - NCRDoctor
@@ -1309,6 +1322,7 @@
         - NCRHeavyTrooper
         - NCRExecutiveOfficer
         - NCRPlatoonLeader
+        - NCRVertibirdPilot
         - NCRCommander
         - NCRMajor
         - NCRDoctor
@@ -1331,6 +1345,7 @@
         - NCRHeavyTrooper
         - NCRExecutiveOfficer
         - NCRPlatoonLeader
+        - NCRVertibirdPilot
         - NCRCommander
         - NCRMajor
   items:

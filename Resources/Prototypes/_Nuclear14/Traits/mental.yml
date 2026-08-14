@@ -45,6 +45,7 @@
         - NCRCommander
         - NCRExecutiveOfficer
         - NCRPlatoonLeader
+        - NCRVertibirdPilot
         - NCRVeteranRanger
         - NCRFieldRanger
         - NCRPatrolRanger
@@ -69,6 +70,7 @@
         - BoSPaladinCommander # #Cythisiax Added - personal-whitelist Paladin Commander is a combat role
         - BoSMidPaladin
         - BoSMidKnight
+        - BoSKnightPilot
         - BoSMidSquire
         # Forge-Change-Start
         #- BoSMidInquisitor # Misfits Fix: job prototype commented out

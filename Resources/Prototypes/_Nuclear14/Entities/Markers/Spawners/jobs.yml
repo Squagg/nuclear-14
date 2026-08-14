@@ -398,6 +398,19 @@
       - state: green
       - state: lt # Misfits Change - shutting up an error, TODO: we should get a platoonlead sprite for this
 
+# #Misfits Add - Vertibird Pilot spawn point.
+- type: entity
+  id: N14SpawnPointNCRVertibirdPilot
+  parent: N14SpawnPointNCRCadet
+  name: vertibird pilot
+  components:
+  - type: SpawnPoint
+    job_id: NCRVertibirdPilot
+  - type: Sprite
+    layers:
+      - state: green
+      - state: lt # TODO: replace with a dedicated aviator sprite when one exists
+
 # Tribals
 - type: entity
   id: N14SpawnPointTribal

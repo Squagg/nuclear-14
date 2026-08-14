@@ -114,6 +114,7 @@
     - !type:CharacterJobRequirement
       jobs:
         - EnclaveJuniorOfficer
+        - EnclaveVertibirdPilot
   items:
     - ClothingNeckPinEnclaveSecondLieutenant
 
@@ -126,6 +127,7 @@
     - !type:CharacterJobRequirement
       jobs:
         - EnclaveJuniorOfficer
+        - EnclaveVertibirdPilot
     - !type:CharacterPlaytimeRequirement
       tracker: EnclaveJuniorOfficer
       min: 72000 # 20 hours

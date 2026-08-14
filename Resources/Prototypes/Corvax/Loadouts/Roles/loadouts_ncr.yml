@@ -17,6 +17,7 @@
     - NCRHeavyTrooper
     - NCRExecutiveOfficer
     - NCRPlatoonLeader
+    - NCRVertibirdPilot
     - NCRCommander
     - NCRMajor
     - NCRDoctor
@@ -49,6 +50,7 @@
     - NCRHeavyTrooper
     - NCRExecutiveOfficer
     - NCRPlatoonLeader
+    - NCRVertibirdPilot
     - NCRCommander
     - NCRMajor
     - NCRDoctor
@@ -81,6 +83,7 @@
     - NCRHeavyTrooper
     - NCRExecutiveOfficer
     - NCRPlatoonLeader
+    - NCRVertibirdPilot
     - NCRCommander
     - NCRMajor
     - NCRDoctor
@@ -115,6 +118,7 @@
     - NCRFirstSergeant
     - NCRExecutiveOfficer
     - NCRPlatoonLeader
+    - NCRVertibirdPilot
     - NCRCommander
     - NCRMajor
   - !type:CharacterPlaytimeRequirement

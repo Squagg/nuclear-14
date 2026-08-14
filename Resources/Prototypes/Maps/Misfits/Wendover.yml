@@ -65,6 +65,7 @@
           NCRProvost: [ 1, 1 ]
           NCRExecutiveOfficer: [ 1, 1 ]
           NCRPlatoonLeader: [ 1, 1 ]
+          NCRVertibirdPilot: [ 1, 1 ] # #Misfits Add
           NCRRO: [ 1, 1 ]
           NCRChiefRanger: [ 1, 0 ]  # #Misfits Change - admin-only Chief Ranger; renamed from ChiefRanger
           NCRVeteranRanger: [ 1, 1 ] # #Misfits Change - renamed from RangerVeteran
@@ -95,6 +96,7 @@
           BoSWestScribe: [ 1, 1 ] # Misfits Change
           BoSMidPaladin: [ 1, 1 ]  #Misfits Tweak: 1 slot — Senior Paladin is a rare rank
           BoSMidKnight: [ 3, 3 ]
+          BoSKnightPilot: [ 1, 1 ] # #Misfits Add
           BoSMidScribe: [ 3, 3 ]
           BoSPaladin: [ 3, 3 ]  #Misfits Tweak: 3 slots — standard Paladin complement
           BoSKnight: [ 3, 3 ]  #Misfits Change /Add/
@@ -157,6 +159,7 @@
           EnclaveCommander: [ 1, 1 ]
           EnclaveSeniorOfficer: [ 1, 1 ]
           EnclaveJuniorOfficer: [ 1, 1 ]
+          EnclaveVertibirdPilot: [ 1, 1 ] # #Misfits Add
           EnclaveNCO: [ 2, 2 ]
           EnclaveEnlisted: [ 4, 4 ]
           EnclaveHeadScientist: [ 1, 1 ]

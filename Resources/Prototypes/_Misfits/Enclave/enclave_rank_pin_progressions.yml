@@ -1,0 +1,22 @@
+# #Misfits Add - Enclave Rank Pin Progressions
+# NCRRankPinSpawnSystem matches on job ID, not faction, so Enclave roles use the same prototype.
+# Only roles that earn rank over time live here; fixed-rank Enclave jobs keep their pin in startingGear.
+#
+# Tracker quick-reference (use with: playtime_addrole <user> <tracker> <time>)
+#   EnclaveVertibirdPilot     — Enclave Vertibird Pilot
+
+# Vertibird Pilot: 2LT (O-1) → 1LT (O-2) at 20h → Captain (O-3) at 40h
+# Enclave aviators hold commissions, so the ladder tops out level with the Senior Officer billet.
+- type: ncrRankPinProgression
+  id: EnclaveVertibirdPilotPins
+  jobs:
+    - EnclaveVertibirdPilot
+  tracker: EnclaveVertibirdPilot
+  departmentTracker: false
+  thresholds:
+    - min: 0
+      entity: ClothingNeckPinEnclaveSecondLieutenant
+    - min: 72000   # 20 hours
+      entity: ClothingNeckPinEnclaveFirstLieutenant
+    - min: 144000  # 40 hours
+      entity: ClothingNeckPinEnclaveCaptain

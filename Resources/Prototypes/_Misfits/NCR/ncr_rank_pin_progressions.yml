@@ -19,6 +19,7 @@
 #   NCRMilitaryPoliceRecruit  — NCRMP Specialist
 #   NCRMilitaryPoliceSergeant — NCRMP Staff Sergeant
 #   NCRMilitaryPoliceCaptain  — NCRMP First Lieutenant
+#   NCRVertibirdPilot         — NCR Vertibird Pilot
 
 # Commander: Captain (O-3) → Major (O-4) at 20h
 - type: ncrRankPinProgression
@@ -249,6 +250,22 @@
       entity: ClothingNeckPinNCRMasterSergeant
     - min: 216000  # 60 hours
       entity: ClothingNeckPinNCR1stSergeant
+
+# #Misfits Add - Vertibird Pilot: WO1 (W-1) → CW2 (W-2) at 20h → CW3 (W-3) at 40h
+# Army aviation runs on the warrant officer track, so pilots rank apart from the command ladder.
+- type: ncrRankPinProgression
+  id: NCRVertibirdPilotPins
+  jobs:
+    - NCRVertibirdPilot
+  tracker: NCRVertibirdPilot
+  departmentTracker: false
+  thresholds:
+    - min: 0
+      entity: ClothingNeckPinNCRWarrantOfficer
+    - min: 72000   # 20 hours
+      entity: ClothingNeckPinNCRChiefWarrantOfficer2
+    - min: 144000  # 40 hours
+      entity: ClothingNeckPinNCRChiefWarrantOfficer3
 
 # NCRMP First Lieutenant: 1LT (O-2) -> CPT (O-3) at 20h -> MAJ (O-4) at 40h -> LTC (O-5) at 80h
 - type: ncrRankPinProgression

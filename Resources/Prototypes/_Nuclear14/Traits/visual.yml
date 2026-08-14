@@ -17,6 +17,7 @@
     - NCRCommander
     - NCRExecutiveOfficer
     - NCRPlatoonLeader
+    - NCRVertibirdPilot
     - NCRDoctor
     - NCRVeteranRanger
     - NCRFieldRanger
@@ -39,6 +40,7 @@
     #- BoSMidInquisitor # Misfits Fix: job prototype commented out
     - BoSMidScribe
     - BoSMidKnight
+    - BoSKnightPilot
     - BoSMidSquire
     - CaesarLegionCenturion
     - CaesarLegionLegate

@@ -42,6 +42,7 @@
   - BoSMidPaladin                # Senior Paladin | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_seniorpaladin.yml
   - BoSMidKnight                 # Senior Knight  | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_seniorknight.yml
   - BoSMidScribe                 # Senior Scribe  | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_seniorscribe.yml
+  - BoSKnightPilot               # Knight-Pilot   | _Misfits/Roles/Jobs/BrotherhoodOfSteel/bos_knight_pilot.yml  #Misfits Add
   # Members
   #- BoSWashingtonPaladin         # Paladin (old Washington)
   #- BoSWashingtonKnight          # Knight (old Washington)
@@ -77,6 +78,8 @@
   - NCRExecutiveOfficer  # NCR Executive Officer   | _Misfits/Roles/Jobs/NCR/ncr_lieutenant.yml
   - NCRPlatoonLeader     # NCR Platoon Leader      | _Misfits/Roles/Jobs/NCR/ncr_platoon_leader.yml
   - NCRRO                # NCR Requisition Officer | _Misfits/Roles/Jobs/NCR/ncr_requisition_officer.yml
+  # Aviation (WO1/CW2/CW3 pins) — ranks on the warrant officer track, outside the command ladder
+  - NCRVertibirdPilot    # NCR Vertibird Pilot     | _Misfits/Roles/Jobs/NCR/ncr_vertibird_pilot.yml # #Misfits Add
   # NCOs — 4 map slots, one job (CPL/SGT/SSG/SFC pins)
   - NCRNCO               # NCR NCO (4 slots)       | _Misfits/Roles/Jobs/NCR/ncr_sergeant.yml
   # Specialists (PV2/PFC/SPC pins)

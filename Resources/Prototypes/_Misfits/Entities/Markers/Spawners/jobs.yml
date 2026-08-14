@@ -37,6 +37,19 @@
       - state: green
       - state: knight
 
+# #Misfits Add - Knight-Pilot spawn point.
+- type: entity
+  parent: MisfitsSpawnPointBoSMidPaladinCommander
+  id: MisfitsSpawnPointBoSKnightPilot
+  name: Brotherhood Knight-Pilot
+  components:
+  - type: SpawnPoint
+    job_id: BoSKnightPilot
+  - type: Sprite
+    layers:
+      - state: green
+      - state: knight
+
 - type: entity
   parent: MisfitsSpawnPointBoSMidPaladinCommander
   id: MisfitsSpawnPointBoSMidPaladin
@@ -652,6 +665,19 @@
   components:
   - type: SpawnPoint
     job_id: EnclaveJuniorOfficer
+  - type: Sprite
+    layers:
+      - state: green
+      - state: lt
+
+# #Misfits Add - Vertibird Pilot spawn point.
+- type: entity
+  parent: MisfitsSpawnPointEnclaveCommander
+  id: MisfitsSpawnPointEnclaveVertibirdPilot
+  name: Enclave Vertibird Pilot
+  components:
+  - type: SpawnPoint
+    job_id: EnclaveVertibirdPilot
   - type: Sprite
     layers:
       - state: green

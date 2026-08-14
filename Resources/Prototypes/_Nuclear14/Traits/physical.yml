@@ -449,6 +449,7 @@
         - BoSMidPaladinCommander
         - BoSMidPaladin
         - BoSMidKnight
+        - BoSKnightPilot
         #- BoSWashingtonCommander #Misfits Change /Comment-out/: Washington BoS removed
         #- BoSWashingtonPaladin
         #- BoSWashingtonKnight
@@ -489,6 +490,7 @@
         - BoSMidPaladinCommander
         - BoSMidPaladin
         - BoSMidKnight
+        - BoSKnightPilot
         #- BoSWashingtonCommander #Misfits Change /Comment-out/: Washington BoS removed
         #- BoSWashingtonPaladin
         #- BoSWashingtonKnight
@@ -519,6 +521,7 @@
         - BoSMidPaladinCommander
         - BoSMidPaladin
         - BoSMidKnight
+        - BoSKnightPilot
     - !type:CharacterTraitRequirement
       inverted: true
       traits:

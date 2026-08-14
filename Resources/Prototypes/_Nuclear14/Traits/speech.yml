@@ -94,6 +94,7 @@
     - NCRCommander
     - NCRExecutiveOfficer
     - NCRPlatoonLeader
+    - NCRVertibirdPilot
     - NCRVeteranRanger
     - NCRFieldRanger
     - NCRPatrolRanger
@@ -114,6 +115,7 @@
     - NCRCadet
     - BoSMidScribe
     - BoSMidKnight
+    - BoSKnightPilot
     - BoSMidSquire
     - CaesarLegionCenturion
     - CaesarLegionLegate

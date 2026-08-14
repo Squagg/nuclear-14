@@ -21,6 +21,9 @@ job-description-ncr-weapon-specialist = You are a weapons-qualified specialist o
 job-name-ncr-requisition-officer = NCR Requisition Officer
 job-description-ncr-requisition-officer = You are a Quartermaster and Requisition Officer of NCR, maintain the armies' equipment and supervise the allocation of its resources.
 
+job-name-ncr-vertibird-pilot = NCR Vertibird Pilot
+job-description-ncr-vertibird-pilot = You fly the Republic's vertibirds. Insertion, extraction, and casualty evacuation are yours to run, and the bird you are given is worth more than the platoon riding in it. You hold a warrant, not a commission — you start as a Warrant Officer and climb to CW3 on flight hours alone.
+
 job-name-ncr-citizen = NCR Citizen
 job-description-ncr-citizen = You are a citizen of the NCR coming east for work, to help the military as a Civilian contractor.
 
@@ -36,6 +39,8 @@ job-name-enclave-senior-officer = Enclave Senior Officer
 job-description-enclave-senior-officer = Serve as the Commander's right hand, directing field operations and managing subordinate officers. (WARNING YOU CAN BE RR'D FOR ANY REASON AS ENCLAVE BY YOUR COMMANDER)
 job-name-enclave-junior-officer = Enclave Junior Officer
 job-description-enclave-junior-officer = Lead squads in the field, execute mission objectives, and bridge the gap between NCOs and senior command. (WARNING YOU CAN BE RR'D FOR ANY REASON AS ENCLAVE BY YOUR COMMANDER)
+job-name-enclave-vertibird-pilot = Enclave Vertibird Pilot
+job-description-enclave-vertibird-pilot = You fly for the Enclave. The vertibird is the last symbol of what America was, and you are trusted to keep it in the air. Your commission begins at Second Lieutenant and reaches Captain with hours logged. (WARNING YOU CAN BE RR'D FOR ANY REASON AS ENCLAVE BY YOUR COMMANDER)
 job-name-enclave-nco = Enclave NCO
 job-description-enclave-nco = Maintain discipline, train enlisted personnel, and ensure tactical readiness on the ground. (WARNING YOU CAN BE RR'D FOR ANY REASON AS ENCLAVE BY YOUR COMMANDER)
 job-name-enclave-enlisted = Enclave Enlisted
@@ -143,6 +148,8 @@ job-name-bos-paladin = Brotherhood Paladin
 job-description-bos-paladin = Fight as the Brotherhood's frontline heavy infantry and defend the chapter's interests.
 job-name-bos-knight = Brotherhood Knight
 job-description-bos-knight = Protect the chapter, escort missions, and recover technology in the field.
+job-name-bos-knight-pilot = Brotherhood Knight-Pilot
+job-description-bos-knight-pilot = You are the chapter's aviator, a Knight trusted with recovered vertibird technology. Keep the bird flying, move the Brotherhood's people and salvage, and remember that the machine is Brotherhood property first and your ride second.
 job-name-bos-scribe = Brotherhood Scribe
 job-description-bos-scribe = Support the chapter with research, medicine, and technical expertise.
 job-name-bos-initiate = Brotherhood Initiate
