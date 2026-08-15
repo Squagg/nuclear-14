@@ -135,24 +135,28 @@
   name: Experimental X-01 Power Armor
   description: A set of X-01 power armor made to fit a supermutant, the extensive modifications have left it less durable than a standard set of X-01.
   components:
+  - type: MisfitsEnclaveIssue
+  # #Misfits Tweak - Enclave issue, tuned alongside the rest of the faction's armor in
+  # _Misfits/Entities/Clothing/OuterClothing/PowerArmor/enclave_apa.yml.
   - type: PowerArmorIntegrity
-    brokenBleedthroughRatio: 1.0  # #Misfits Add - when broken, only armor coefficients apply
-    maxIntegrity: 500 # #Misfits Tweak: By Bill, 500 durability.
+    brokenBleedthroughRatio: 0.4
+    bleedthroughRatio: 0.02
+    maxIntegrity: 5500
   - type: Sprite
     sprite: _Misfits/Clothing/OuterClothing/PowerArmor/Mutant_PA.rsi
   - type: Clothing
     sprite: _Misfits/Clothing/OuterClothing/PowerArmor/Mutant_PA.rsi
     equipDelay: 14400 # The Experimental X-01 Power armor is a living Tomb for whichever poor supermutant they put in it, so it takes the entire round to unequip/equip.
     unequipDelay: 14400
-  - type: Armor # #Misfits Tweak: Added Heat and Piercing coefficients — pre-reduces damage before integrity absorption so PA stays above Centurion/Vet.Ranger at all integrity levels.
+  - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.70
-        Slash: 0.70
-        Piercing: 0.70
-        Heat: 0.70
-        Caustic: 0.75
-        Radiation: 0.6
+        Blunt: 0.22
+        Slash: 0.22
+        Piercing: 0.22
+        Heat: 0.22
+        Caustic: 0.22
+        Radiation: 0.5
   - type: Unremoveable # This is your casket. Service guarantees citizenship.
   - type: Tag
     tags:
@@ -168,7 +172,7 @@
       shoes: N14ClothingPABoots
       back: N14ClothingPowerSystemsBack
   - type: ExplosionResistance
-    damageCoefficient: 0.12 # #Misfits Tweak: T-51 blast resistance — ~14 HP at ground zero
+    damageCoefficient: 0.05
 
 - type: entity
   parent: N14ClothingOuterPowerArmorT45

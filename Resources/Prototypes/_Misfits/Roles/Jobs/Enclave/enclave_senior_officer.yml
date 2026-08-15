@@ -43,7 +43,7 @@
     head: N14ClothingHeadHatEnclaveOfficer
     back: N14ClothingBackpackMilitary
     jumpsuit: N14ClothingUniformJumpsuitEnclave
-    outerClothing: N14ClothingOuterPowerArmorAdvanced2
+    outerClothing: MisfitsEnclavePowerArmorX02
     shoes: N14ClothingBootsCombatFilled
     gloves: N14ClothingHandsGlovesCombat
     neck: ClothingNeckPinEnclaveCaptain

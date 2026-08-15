@@ -1,0 +1,55 @@
+# #Misfits Add - Enclave-issue power armor.
+# These exist as separate entities because N14ClothingOuterPowerArmorAdvanced1/2 are the parents of
+# the NCR and tribal APA reskins, so buffing the shared prototypes would arm the factions hunting us.
+# Everything except the survivability block is inherited from the standard X-01 / X-02.
+#
+# Survivability targets: a trooper holds under roughly eight attackers' sustained fire long enough to
+# fight back, and survives the whole enemy force focusing them for about half a minute.
+
+- type: entity
+  parent: N14ClothingOuterPowerArmorAdvanced1
+  id: MisfitsEnclavePowerArmorX01
+  name: X-01 power armor
+  suffix: Enclave Issue
+  description: A field-issue X-01 suit maintained to pre-war tolerances. The plating is layered, the servos are tuned, and the seals have never once been opened by a scavenger.
+  components:
+  - type: MisfitsEnclaveIssue
+  - type: PowerArmorIntegrity
+    maxIntegrity: 5000
+    bleedthroughRatio: 0.02   # 2% of post-coefficient damage reaches the wearer while intact
+    brokenBleedthroughRatio: 0.4
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.25
+        Slash: 0.25
+        Piercing: 0.25
+        Heat: 0.25
+        Caustic: 0.25
+        Radiation: 0.5
+  - type: ExplosionResistance
+    damageCoefficient: 0.05
+
+- type: entity
+  parent: N14ClothingOuterPowerArmorAdvanced2
+  id: MisfitsEnclavePowerArmorX02
+  name: X-02 power armor
+  suffix: Enclave Issue
+  description: An officer's X-02 suit. Thicker plate than the X-01 it replaced, and the only armor on the continent still receiving factory parts.
+  components:
+  - type: MisfitsEnclaveIssue
+  - type: PowerArmorIntegrity
+    maxIntegrity: 5500
+    bleedthroughRatio: 0.02
+    brokenBleedthroughRatio: 0.4
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.22
+        Slash: 0.22
+        Piercing: 0.22
+        Heat: 0.22
+        Caustic: 0.22
+        Radiation: 0.5
+  - type: ExplosionResistance
+    damageCoefficient: 0.04
